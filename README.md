@@ -28,12 +28,15 @@ Even if it not an action, and to respect the objective of the TD we will focus o
 
 4.	BIAS identification 
 We have identified some heavy and important biases in the dataset:
+
  ![image](https://user-images.githubusercontent.com/97101162/195266922-f1acadad-652f-404a-a225-c0cf2340e485.png)
 
 The first bias is the dates, we only have data for 45 days from November first to December 17th (we will see the consequences of this bias in the accuracy difference of our two approaches)
+
  ![image](https://user-images.githubusercontent.com/97101162/195266942-ed83ab29-a8c9-4175-bd80-b5de1c66dc09.png)
 
 The second bias we have found is the disproportionality of the labels; having too many of one ‘class’ in the labels could tilt the prediction towards it, we have encountered while training our models that sometimes the model doesn’t learn and instead jut predicts 2 all the time and be correct for almost half of the times. This was however a rare case where while splitting the dataset into training and testing most of the 2s were in the training while the other classes were mostly in the test set.
+
  ![image](https://user-images.githubusercontent.com/97101162/195266961-806f2745-f1f6-449e-8b5b-8c7bae1c5741.png)
 
 Another bias is the lack of data regarding other service providers.
@@ -87,19 +90,25 @@ The client’s data have 3 variables: precise order date and time, who is the se
 This variables alone are far from being enough, and even though people think that machine and even more deep learning is a magical black box that will just “find the solution“, our job as data scientists is to prepare the data in a relevant way to be fed to the algorithms.
 
 1.	Debit of this day 
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195266990-d1e83603-0093-4ef3-903d-85242503fa59.png)
 
 We want to know how many orders will be processed today, some would argue that would should use this variable as normally we need the day to end to count how many orders we processed, we argue however that the expedition centers know how many workers they employ for that day in advance and therefore the debit of that day, and even so, we need this variable to create the next one, that no one would argue the utility:
 2.	Debit of yesterday 
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195267007-de7b229f-020c-4520-9f79-088df39980c8.png)
 
 By simply shifting the debit column down one position we have now the debit of yesterday and which represents the amount of orders processed the day before (we however needed to cut one day because of NaN)
 3.	Separation of time and date of emission 
+
  ![image](https://user-images.githubusercontent.com/97101162/195267021-e0ed93ab-415e-4812-8069-9e68b8a29b88.png)
 
 We need to separate the two information to work on other features.
 4.	We convert the order time from our human forma HH:MM:SS to a more friendly format to be fed to the mdoels. 
 We simply convert the time of order to the number of minutes that have passed from midnight until the order. We think that this information is crucial as it allows the model to know if this command was made early in the day and be part of Day+0 or made too late and be treated is Day+1.
+
  ![image](https://user-images.githubusercontent.com/97101162/195267055-06e66126-6e20-4b78-93fc-92d82a509e3c.png)
 
 
@@ -165,12 +174,20 @@ The results were as follow
 Approach One; random evaluation set: 87%(+-5%)
 Approach Two; exclusive dates set: 53%(+-17%)
 •	The accuracy in this second approach is significantly lower than the first one.
+
 •	which indicates that our either our model have low generalization ability or that the dataframe and features that we composed aren’t so good
+
 •	we tried to investigate where this accuracy dropout came from with no success
+
 •	53% accuracy can either be good or bad depending on the error margin agreed upon with the client
+
 •	if and error margin of 1day is acceptable then the accuracy would skyrocket
+
 •	53% base accuracy however could be achieved without any AI of any sort and by just giving random lucky guesses.
-•	we also have noticed that the standard deviation of the accuracy score of the second approach is height (+-17%) meaning its highly volatile
+
+•	we also have noticed that the standard deviation of the accuracy score of the second approach is height (+-17%) meaning its highly volatile.
+
 •	while it is not the case for the first approach (+-5%)
+
 
 
