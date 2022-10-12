@@ -113,10 +113,14 @@ We simply convert the time of order to the number of minutes that have passed fr
 
 
 5.	Delay in days
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195267067-03bea25d-9c0c-47bd-b994-56060e3e61c4.png)
 
 Our label which is the difference between the day of expedition and day of order.
 6.	Orders received yesterday 
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195267084-fe0156f7-cf52-4b8a-ba31-c5b8fe12daab.png)
 
 We want to know how many new orders we received; this variable is very important as it will also allow us to calculate the most useful one.
@@ -148,14 +152,19 @@ We want to know how many new orders we received; this variable is very important
 By subtracting the cumulative summation of the debit up to yesterday from the cumulative summation of the order up to yesterday we can conclude the amount of orders that are waiting to be processed from the previous days 
 Note: we also had to slice more rows from the last table and that’s why it start from 14k, also the two tables above don’t start from the same date and is the reason for the inconcinnity.
 8.	Removal of noise, outdated data and wrong data:
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195267177-694161dc-a27e-48d9-84a9-337f086d8dbd.png)
 
 We removed data linked to 1980 that we assume is outdated.
 We removed date from 26/07/2019 as we only had one entry of said date.
+
  ![image](https://user-images.githubusercontent.com/97101162/195267195-9c855b9f-28ac-4eee-8a47-9a913a4c4a04.png)
 
 We removed some wrong entries as we found that some delays were negative.
 9.	Final dataframe:
+
+
  ![image](https://user-images.githubusercontent.com/97101162/195267209-cdf2f349-94ae-4ce4-b530-96b3d25ec8ff.png)
 
 
